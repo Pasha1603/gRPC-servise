@@ -13,7 +13,7 @@ public class KVServiceImpl extends KVServiceImplBase {
         this.tarantoolClient = tarantoolClient;
     }
 
-    @id86240433 (@Override)
+    @Override
     public void put(PutRequest request, StreamObserver<PutResponse> observer) {
         try {
             byte[] value = request.hasValue() ? request.getValue().toByteArray() : null;
@@ -25,13 +25,13 @@ public class KVServiceImpl extends KVServiceImplBase {
         }
     }
 
-    @id86240433 (@Override)
+    @Override
     public void get(GetRequest request, StreamObserver<GetResponse> observer) {
         try {
             byte[] value = tarantoolClient.get(request.getKey());
             GetResponse.Builder builder = GetResponse.newBuilder();
             if (value != null) {
-                builder.setValue(ByteString.copyFrom(value));  // исправлено!
+                builder.setValue(ByteString.copyFrom(value));
             }
             observer.onNext(builder.build());
             observer.onCompleted();
@@ -40,7 +40,7 @@ public class KVServiceImpl extends KVServiceImplBase {
         }
     }
 
-    @id86240433 (@Override)
+    @Override
     public void delete(DeleteRequest request, StreamObserver<DeleteResponse> observer) {
         try {
             boolean deleted = tarantoolClient.delete(request.getKey());
@@ -51,7 +51,7 @@ public class KVServiceImpl extends KVServiceImplBase {
         }
     }
 
-    @id86240433 (@Override)
+    @Override
     public void range(RangeRequest request, StreamObserver<RangeResponse> observer) {
         try {
             List<TarantoolKVClient.KeyValue> items = tarantoolClient.range(
@@ -70,7 +70,7 @@ public class KVServiceImpl extends KVServiceImplBase {
         }
     }
 
-    @id86240433 (@Override)
+    @Override
     public void count(EmptyRequest request, StreamObserver<CountResponse> observer) {
         try {
             long count = tarantoolClient.count();
