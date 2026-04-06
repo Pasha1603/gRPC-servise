@@ -9,7 +9,6 @@ public class KVServiceImpl extends KVServiceImplBase {
 
     private final TarantoolKVClient tarantoolClient;
 
-    // Конструктор (исправлен)
     public KVServiceImpl(TarantoolKVClient tarantoolClient) {
         this.tarantoolClient = tarantoolClient;
     }
