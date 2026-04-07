@@ -48,7 +48,7 @@ public class TarantoolKVClient {
         var result = client.space(spaceName).select(fromKey, toKey).join();
         List<KeyValue> list = new ArrayList<>();
         for (var tuple : result) {
-            // ИСПРАВЛЕНО: tuple.getString(0) - это key, tuple.getObject(1) - это value
+        
             list.add(new KeyValue(tuple.getString(0), (byte[]) tuple.getObject(1)));
         }
         return list;
